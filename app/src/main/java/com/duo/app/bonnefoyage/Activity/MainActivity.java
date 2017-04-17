@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.duo.app.bonnefoyage.R;
+import com.duo.app.bonnefoyage.domein.User;
 import com.duo.app.bonnefoyage.fragment.CityFragment;
 import com.duo.app.bonnefoyage.fragment.NearbyFragment;
 import com.duo.app.bonnefoyage.fragment.TestFragment;
@@ -41,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    /**
+     * The user class with all info needed for application.
+     */
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //todo: get user from intent. for now use test user.
     }
 
 
@@ -109,18 +115,23 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
 
-            //TODO return proper fragment, a custom fragment using a switch
-//            switch (position){
-//                case 0:
-//                    return new CityFragment();
-//                case 1:
-//                    return new NearbyFragment();
-//                case 2:
-//                    return new VisitedLocationsFragment();
-//                default:
-//                    return new CityFragment();
-//            }
-            return new TestFragment();
+            Bundle fragmentBundle = new Bundle();
+            fragmentBundle.putSerializable("user", user);
+            //todo put firebase database item, to get data from? ipv user, or to put data into database.
+            Fragment fragment;
+            switch (position){
+                case 0:
+                    fragment = new CityFragment();
+                case 1:
+                    fragment = new NearbyFragment();
+                case 2:
+                    fragment = new VisitedLocationsFragment();
+                default:
+                    fragment = new CityFragment();
+            }
+            fragment.setArguments(fragmentBundle);
+            return fragment;
+            //TODO: make layouts for each fragment.
         }
 
         @Override
@@ -129,15 +140,20 @@ public class MainActivity extends AppCompatActivity {
             return 3;
         }
 
+        /**
+         * Specifies the name for each tab.
+         * @param position the position to get name of.
+         * @return the name as charSequence
+         */
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "SECTION 1";
+                    return "Cities";
                 case 1:
-                    return "SECTION 2";
+                    return "Nearby";
                 case 2:
-                    return "SECTION 3";
+                    return "History";
             }
             return null;
         }

@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.duo.app.bonnefoyage.R;
+import com.duo.app.bonnefoyage.domein.User;
+
+import java.io.Serializable;
 
 /**
  * this is a fragment for the tabViewActivity it will show a list of recommended cities.
@@ -17,15 +20,23 @@ import com.duo.app.bonnefoyage.R;
  */
 
 public class CityFragment extends Fragment {
+
+    private User user;
+
     @Override
+
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle args = getArguments();
+        user = (User) args.getSerializable("user");
+        //todo: get recommended cities for user, and show in list (RecyclerView)
+        //todo: calculate recommended cities based on user.
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_cities, container, false);
+
         TextView textView = (TextView) rootView.findViewById(R.id.title_textView);
         textView.setText("Recommended cities");
         return rootView;

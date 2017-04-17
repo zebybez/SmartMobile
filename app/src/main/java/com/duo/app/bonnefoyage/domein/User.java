@@ -4,6 +4,7 @@ import android.location.Location;
 
 import com.duo.app.bonnefoyage.Enum.AttractionType;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * Created by yannic on 13/04/2017.
  */
 
-public class User {
+public class User implements Serializable{
     private String email;
     private String name;
     private List<AttractionType> interests;
