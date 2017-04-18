@@ -1,4 +1,4 @@
-package com.duo.app.bonnefoyage.fragment;
+package com.duo.app.bonnefoyage.Activity.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,12 +12,10 @@ import com.duo.app.bonnefoyage.R;
 import com.duo.app.bonnefoyage.domein.User;
 
 /**
- * This is the fragment for the tabViewActivity, it will show a list of nearby LandMarks
- * the main attraction of each landmark and the distance to the landmark.
  * Created by yannic on 13/04/2017.
  */
 
-public class NearbyFragment extends Fragment {
+public class VisitedLocationsFragment extends Fragment {
 
     private User user;
 
@@ -26,18 +24,15 @@ public class NearbyFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
         user = (User) args.getSerializable("user");
-        //todo get list landMarks near user location.
-        //todo start listening for location using gps
-        //todo update list on each location update.
-
+        //Todo load user history, and show in list (RecyclerView)
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_nearby_main, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_visited_locations, container, false);
 
         TextView textView = (TextView) rootView.findViewById(R.id.title_textView);
-        textView.setText("Nearby landmarks");
+        textView.setText("Previous locations");
         return rootView;
     }
 }

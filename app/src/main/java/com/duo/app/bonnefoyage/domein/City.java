@@ -22,23 +22,40 @@ public class City {
 
     public City(String name, Location centreLocation) {
         this.name = name;
+
         this.centreLocation = centreLocation;
         landMarks = new ArrayList<>();
     }
 
-    public void addLandMark(LandMark toAdd){
-        landMarks.add(toAdd);
+    public String getName() {
+        return name;
     }
 
-    public void setBannerImage(Image bannerImage){
+    public Image getBannerImage() {
+        return bannerImage;
+    }
+
+    public void setBannerImage(Image bannerImage) {
         this.bannerImage = bannerImage;
     }
 
-    public boolean checkRecommendable(AttractionType interest){
+    public List<LandMark> getLandMarks() {
+        return landMarks;
+    }
+
+    public Location getCentreLocation() {
+        return centreLocation;
+    }
+
+    public void addLandMark(LandMark toAdd) {
+        landMarks.add(toAdd);
+    }
+
+    public boolean checkRecommendable(AttractionType interest) {
         return false;
     }
 
-    public boolean checkRecommendable(List<AttractionType> interests){
+    public boolean checkRecommendable(List<AttractionType> interests) {
         return false;
     }
 }

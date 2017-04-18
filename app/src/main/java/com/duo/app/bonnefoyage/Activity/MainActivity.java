@@ -1,5 +1,6 @@
 package com.duo.app.bonnefoyage.Activity;
 
+import android.location.Location;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,20 +12,16 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-
-import android.widget.TextView;
 
 import com.duo.app.bonnefoyage.R;
+import com.duo.app.bonnefoyage.domein.City;
 import com.duo.app.bonnefoyage.domein.User;
-import com.duo.app.bonnefoyage.fragment.CityFragment;
-import com.duo.app.bonnefoyage.fragment.NearbyFragment;
-import com.duo.app.bonnefoyage.fragment.TestFragment;
-import com.duo.app.bonnefoyage.fragment.VisitedLocationsFragment;
+import com.duo.app.bonnefoyage.Activity.fragment.CityFragment;
+import com.duo.app.bonnefoyage.Activity.fragment.NearbyFragment;
+import com.duo.app.bonnefoyage.Activity.fragment.VisitedLocationsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -77,6 +74,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //todo: get user from intent. for now use test user.
+        user = new User("test@test.test", "testUser");
+        user.addRecommendation(new City("test1", new Location("fake")));
+        user.addRecommendation(new City("test2", new Location("fake")));
+        user.addRecommendation(new City("test3", new Location("fake")));
+        user.addRecommendation(new City("test4", new Location("fake")));
+        user.addRecommendation(new City("test5", new Location("fake")));
     }
 
 
