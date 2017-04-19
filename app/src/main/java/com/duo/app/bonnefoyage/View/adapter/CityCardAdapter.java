@@ -49,6 +49,7 @@ public class CityCardAdapter extends RecyclerView.Adapter<CityCardAdapter.CityVi
         return cities.size();
     }
 
+    //INNER CLASS
     public class CityViewHolder extends RecyclerView.ViewHolder {
 
         public TextView cityTextView;

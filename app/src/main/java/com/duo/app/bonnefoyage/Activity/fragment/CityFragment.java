@@ -31,9 +31,7 @@ public class CityFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
         user = (User) args.getSerializable("user");
-        //todo: get recommended cities for user, and show in list (RecyclerView)
-
-
+        //todo: get recommended cities for user, and show in list (RecyclerView), FUNCTIONALITEIT
     }
 
     @Override
