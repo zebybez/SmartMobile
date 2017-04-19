@@ -50,7 +50,7 @@ public class CityCardAdapter extends RecyclerView.Adapter<CityCardAdapter.CityVi
     }
 
     //INNER CLASS
-    public class CityViewHolder extends RecyclerView.ViewHolder {
+    public static class CityViewHolder extends RecyclerView.ViewHolder {
 
         public TextView cityTextView;
         public ToggleButton toggleLike;

@@ -16,8 +16,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.duo.app.bonnefoyage.Enum.AttractionType;
 import com.duo.app.bonnefoyage.R;
 import com.duo.app.bonnefoyage.domein.City;
+import com.duo.app.bonnefoyage.domein.LandMark;
 import com.duo.app.bonnefoyage.domein.User;
 import com.duo.app.bonnefoyage.Activity.fragment.CityFragment;
 import com.duo.app.bonnefoyage.Activity.fragment.NearbyFragment;
@@ -73,8 +75,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //todo: get user from intent. for now use test user.
+
+        //testing here
         user = new User("test@test.test", "testUser");
-        user.addRecommendation(new City("test1", new Location("fake"),R.drawable.empire_state_building));
+        Location location = new Location("test");
+        location.setLatitude(40.7);
+        location.setLongitude(-73.9);
+
+        City city = new City("New York", location, R.drawable.empire_state_building);
+        city.addLandMark(new LandMark("testMark", location, AttractionType.Skyscraper));
+
+        user.addRecommendation(city);
         user.addRecommendation(new City("test2", new Location("fake"),R.drawable.empire_state_building));
         user.addRecommendation(new City("test3", new Location("fake"),R.drawable.empire_state_building));
         user.addRecommendation(new City("test4", new Location("fake"),R.drawable.empire_state_building));

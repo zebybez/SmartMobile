@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="80dp">
+
+    <TextView
+        android:id="@+id/textView_LandMarkName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="12dp"
+        android:text="LandMarkName"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/textView_LandMark_Adress_Distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView_LandMarkName"
+        android:layout_below="@+id/textView_LandMarkName"
+        android:text="addres here, distance" />
+</RelativeLayout>

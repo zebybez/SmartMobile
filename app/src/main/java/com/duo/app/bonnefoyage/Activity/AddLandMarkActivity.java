@@ -17,7 +17,7 @@ public class AddLandMarkActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_landmark);
-
+        //todo make layout
         //todo get buttons ect.
     }
 
