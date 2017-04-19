@@ -4,6 +4,7 @@ import android.location.Location;
 import android.media.Image;
 
 import com.duo.app.bonnefoyage.Enum.AttractionType;
+import com.duo.app.bonnefoyage.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,17 +15,19 @@ import java.util.List;
  */
 
 public class City {
+    private int imageID;
     private String name;
     private Image bannerImage;
     private List<LandMark> landMarks;
     private Location centreLocation;
 
 
-    public City(String name, Location centreLocation) {
+    public City(String name, Location centreLocation, int imageID) {
+        this.imageID = imageID;
         this.name = name;
-
         this.centreLocation = centreLocation;
         landMarks = new ArrayList<>();
+
     }
 
     public String getName() {
@@ -57,5 +60,9 @@ public class City {
 
     public boolean checkRecommendable(List<AttractionType> interests) {
         return false;
+    }
+
+    public int getImageID() {
+        return imageID;
     }
 }

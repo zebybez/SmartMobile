@@ -19,7 +19,7 @@ import java.util.List;
  * Created by yannic on 18-4-17.
  */
 
-public class CityAdapter extends RecyclerView.Adapter<CityAdapter.CityViewHolder> {
+public class CityCardAdapter extends RecyclerView.Adapter<CityCardAdapter.CityViewHolder> {
 
     private List<City> cities;
 
@@ -28,7 +28,7 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.CityViewHolder
         super.onAttachedToRecyclerView(recyclerView);
     }
 
-    public CityAdapter(List<City> cities) {
+    public CityCardAdapter(List<City> cities) {
         this.cities = cities;
     }
 
@@ -41,6 +41,7 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.CityViewHolder
     @Override
     public void onBindViewHolder(CityViewHolder holder, int position) {
         holder.cityTextView.setText(cities.get(position).getName());
+        holder.imageButtonViewCity.setImageResource(cities.get(position).getImageID());
     }
 
     @Override

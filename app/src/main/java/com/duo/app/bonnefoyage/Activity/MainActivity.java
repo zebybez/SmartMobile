@@ -75,11 +75,13 @@ public class MainActivity extends AppCompatActivity {
 
         //todo: get user from intent. for now use test user.
         user = new User("test@test.test", "testUser");
-        user.addRecommendation(new City("test1", new Location("fake")));
-        user.addRecommendation(new City("test2", new Location("fake")));
-        user.addRecommendation(new City("test3", new Location("fake")));
-        user.addRecommendation(new City("test4", new Location("fake")));
-        user.addRecommendation(new City("test5", new Location("fake")));
+        user.addRecommendation(new City("test1", new Location("fake"),R.drawable.empire_state_building));
+        user.addRecommendation(new City("test2", new Location("fake"),R.drawable.empire_state_building));
+        user.addRecommendation(new City("test3", new Location("fake"),R.drawable.empire_state_building));
+        user.addRecommendation(new City("test4", new Location("fake"),R.drawable.empire_state_building));
+        user.addRecommendation(new City("test5", new Location("fake"),R.drawable.empire_state_building));
+
+        //todo: calculate recommended cities based on user. make interface for a Recommender class.
     }
 
 
@@ -125,16 +127,20 @@ public class MainActivity extends AppCompatActivity {
             switch (position){
                 case 0:
                     fragment = new CityFragment();
+                    break;
                 case 1:
                     fragment = new NearbyFragment();
+                    break;
                 case 2:
                     fragment = new VisitedLocationsFragment();
+                    break;
                 default:
                     fragment = new CityFragment();
+                    break;
             }
             fragment.setArguments(fragmentBundle);
             return fragment;
-            //TODO: make layouts for each fragment.
+            //TODO: make layouts for each fragment. <strike>CityFragment</strike>, NearbyFragment.
         }
 
         @Override

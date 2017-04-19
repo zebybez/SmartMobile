@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.duo.app.bonnefoyage.R;
-import com.duo.app.bonnefoyage.View.adapter.CityAdapter;
+import com.duo.app.bonnefoyage.View.adapter.CityCardAdapter;
 import com.duo.app.bonnefoyage.domein.User;
 
 /**
@@ -32,7 +32,7 @@ public class CityFragment extends Fragment {
         Bundle args = getArguments();
         user = (User) args.getSerializable("user");
         //todo: get recommended cities for user, and show in list (RecyclerView)
-        //todo: calculate recommended cities based on user. => do in main method oncreate?
+
 
     }
 
@@ -47,7 +47,7 @@ public class CityFragment extends Fragment {
         //setup manager
         recycleViewCities.setLayoutManager(new LinearLayoutManager(this.getContext()));
         //setup adapter
-        recycleViewCities.setAdapter(new CityAdapter(user.getRecommendations()));
+        recycleViewCities.setAdapter(new CityCardAdapter(user.getRecommendations()));
         return rootView;
     }
 }
