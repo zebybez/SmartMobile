@@ -1,5 +1,6 @@
-package com.duo.app.bonnefoyage;
+package com.duo.app.bonnefoyage.Activity;
 
+import android.location.Location;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,16 +12,18 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 
-import android.widget.TextView;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.duo.app.bonnefoyage.Enum.AttractionType;
+import com.duo.app.bonnefoyage.R;
+import com.duo.app.bonnefoyage.domein.City;
+import com.duo.app.bonnefoyage.domein.LandMark;
+import com.duo.app.bonnefoyage.domein.User;
+import com.duo.app.bonnefoyage.Activity.fragment.CityFragment;
+import com.duo.app.bonnefoyage.Activity.fragment.NearbyFragment;
+import com.duo.app.bonnefoyage.Activity.fragment.VisitedLocationsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,12 +36,14 @@ public class MainActivity extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
-
     /**
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-
+    /**
+     * The user class with all info needed for application.
+     */
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -58,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
+        //
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,12 +73,25 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        // Write a message to the database
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
+        //todo: get user from intent. for now use test user.
 
-        myRef.setValue("Hello, World!");
+        //testing here
+        user = new User("test@test.test", "testUser");
+        Location location = new Location("test");
+        location.setLatitude(40.7);
+        location.setLongitude(-73.9);
+
+        City city = new City("New York", location, R.drawable.empire_state_building);
+        city.addLandMark(new LandMark("testMark", location, AttractionType.Skyscraper));
+
+        user.addRecommendation(city);
+        user.addRecommendation(new City("test2", new Location("fake"),R.drawable.empire_state_building));
+        user.addRecommendation(new City("test3", new Location("fake"),R.drawable.empire_state_building));
+        user.addRecommendation(new City("test4", new Location("fake"),R.drawable.empire_state_building));
+        user.addRecommendation(new City("test5", new Location("fake"),R.drawable.empire_state_building));
+
+        //todo: calculate recommended cities based on user. make interface for a Recommender class.
     }
 
 
@@ -98,41 +118,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        public PlaceholderFragment() {
-        }
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
-        }
-    }
-
-    /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
@@ -144,9 +129,28 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+
+            Bundle fragmentBundle = new Bundle();
+            fragmentBundle.putSerializable("user", user);
+            //todo put firebase database item, to get data from? ipv user, or to put data into database.
+            Fragment fragment;
+            switch (position){
+                case 0:
+                    fragment = new CityFragment();
+                    break;
+                case 1:
+                    fragment = new NearbyFragment();
+                    break;
+                case 2:
+                    fragment = new VisitedLocationsFragment();
+                    break;
+                default:
+                    fragment = new CityFragment();
+                    break;
+            }
+            fragment.setArguments(fragmentBundle);
+            return fragment;
+            //TODO: make layouts for each fragment. <strike>CityFragment</strike>, NearbyFragment.
         }
 
         @Override
@@ -155,15 +159,20 @@ public class MainActivity extends AppCompatActivity {
             return 3;
         }
 
+        /**
+         * Specifies the name for each tab.
+         * @param position the position to get name of.
+         * @return the name as charSequence
+         */
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "SECTION 1";
+                    return "Cities";
                 case 1:
-                    return "SECTION 2";
+                    return "Nearby";
                 case 2:
-                    return "SECTION 3";
+                    return "History";
             }
             return null;
         }

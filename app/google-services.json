@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "547100565685",
+    "firebase_url": "https://bonnefoyage-b6c66.firebaseio.com",
+    "project_id": "bonnefoyage-b6c66",
+    "storage_bucket": "bonnefoyage-b6c66.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:547100565685:android:4a25805ad048efd8",
+        "android_client_info": {
+          "package_name": "com.duo.app.bonnefoyage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "547100565685-6ivnnc94t8tph5ojj6gcqgt4kofgko2s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.duo.app.bonnefoyage",
+            "certificate_hash": "c6f360ff01dd1bc5c70e277af74646f6d36bf5db"
+          }
+        },
+        {
+          "client_id": "547100565685-hsrmhsloqn0l592bvp1dol389pf7dos5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.duo.app.bonnefoyage",
+            "certificate_hash": "b9df41b8b781cbeac23313452f681a4f7ce2d54e"
+          }
+        },
+        {
+          "client_id": "547100565685-db7jio44d9q85hqifd9lcp29fgildbjt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8SyBy0HuI7LQSdqE7pOsJkYiLL1Lsn1c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "547100565685-db7jio44d9q85hqifd9lcp29fgildbjt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
