@@ -62,13 +62,7 @@ public class NearbyFragment extends Fragment {
         user = (User) args.getSerializable("user");
         context = getActivity();
         dataRepo = new TestDataBase();
-        //todo get current city from user location. and get list of landmarks
-        //todo start listening for location using gps
-        //todo update list of landmarks on each location update.
-
-        //currentCity = getCity(user.getLocation());
         geo = new Geocoder(context);
-
     }
 
     private void listenForLocationUpdates() {

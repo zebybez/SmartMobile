@@ -16,6 +16,8 @@ public class CityViewActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_city_view);
+
+
         //Todo create functionality ect.
     }
 
