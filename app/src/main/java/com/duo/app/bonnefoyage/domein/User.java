@@ -3,6 +3,7 @@ package com.duo.app.bonnefoyage.domein;
 import android.location.Location;
 
 import com.duo.app.bonnefoyage.Enum.AttractionType;
+import com.duo.app.bonnefoyage.R;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class User implements Serializable{
     public User(String email, String name) {
         this.email = email;
         this.name = name;
-        currentCity = null;
+        currentCity = new City("Unknown", new Location("error"), R.drawable.empire_state_building);
 
         interests = new ArrayList<>();
         likedLocations = new ArrayList<>();

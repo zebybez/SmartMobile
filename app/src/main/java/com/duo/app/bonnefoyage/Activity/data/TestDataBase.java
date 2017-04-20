@@ -1,6 +1,11 @@
 package com.duo.app.bonnefoyage.Activity.data;
 
+import android.location.Location;
+
+import com.duo.app.bonnefoyage.Enum.AttractionType;
+import com.duo.app.bonnefoyage.R;
 import com.duo.app.bonnefoyage.domein.City;
+import com.duo.app.bonnefoyage.domein.LandMark;
 import com.duo.app.bonnefoyage.domein.User;
 
 import java.util.Collection;
@@ -22,6 +27,17 @@ public class TestDataBase implements IBonneRepo{
         userMap = new HashMap<>();
 
         //fill with test data
+        //location
+        Location testLocation = new Location("test");
+        testLocation.setLatitude(51.4);
+        testLocation.setLongitude(5.5);
+        //city
+        City city = new City("Eindhoven", testLocation, R.drawable.empire_state_building);
+        city.addLandMark(new LandMark("Vue bioscoop", testLocation, AttractionType.Cinema));
+
+        //put cities
+        cityMap.put(city.getName(), city);
+
     }
 
     public Collection<City> getCityList(){

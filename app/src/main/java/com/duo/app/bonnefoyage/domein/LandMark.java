@@ -1,10 +1,12 @@
 package com.duo.app.bonnefoyage.domein;
 
+import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 
 import com.duo.app.bonnefoyage.Enum.AttractionType;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

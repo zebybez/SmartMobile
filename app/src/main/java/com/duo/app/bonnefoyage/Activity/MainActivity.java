@@ -17,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.duo.app.bonnefoyage.Activity.data.IBonneRepo;
+import com.duo.app.bonnefoyage.Activity.data.TestDataBase;
 import com.duo.app.bonnefoyage.Enum.AttractionType;
 import com.duo.app.bonnefoyage.R;
 import com.duo.app.bonnefoyage.domein.City;
@@ -46,11 +48,37 @@ public class MainActivity extends AppCompatActivity {
      */
     private User user;
 
+    private IBonneRepo dataRepo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        dataRepo = new TestDataBase();
+        //testing here
+        user = new User("test@test.test", "testUser");
+
+        Location location = new Location("test");
+        location.setLatitude(54.7);
+        location.setLongitude(3.9);
+
+        City city = new City("New York", location, R.drawable.empire_state_building);
+        City city2 = new City("Eindhoven", location, R.drawable.empire_state_building);
+        city.addLandMark(new LandMark("testMark1", location, AttractionType.Skyscraper));
+        city.addLandMark(new LandMark("testMark2", location, AttractionType.Skyscraper));
+        city.addLandMark(new LandMark("testMark3", location, AttractionType.Skyscraper));
+        city.addLandMark(new LandMark("testMark4", location, AttractionType.Skyscraper));
+        city.addLandMark(new LandMark("testMark5", location, AttractionType.Skyscraper));
+
+        user.addRecommendation(city);
+        user.addRecommendation(city2);
+        user.addRecommendation(new City("test2", new Location("fake"),R.drawable.empire_state_building));
+        user.addRecommendation(new City("test3", new Location("fake"),R.drawable.empire_state_building));
+        user.addRecommendation(new City("test4", new Location("fake"),R.drawable.empire_state_building));
+        user.addRecommendation(new City("test5", new Location("fake"),R.drawable.empire_state_building));
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -76,27 +104,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //user = dataRepo.getUser("test@test.test");
         //todo: get user from intent. for now use test user.
 
-        //testing here
-        user = new User("test@test.test", "testUser");
 
-        Location location = new Location("test");
-        location.setLatitude(54.7);
-        location.setLongitude(3.9);
-
-        City city = new City("New York", location, R.drawable.empire_state_building);
-        city.addLandMark(new LandMark("testMark1", location, AttractionType.Skyscraper));
-        city.addLandMark(new LandMark("testMark2", location, AttractionType.Skyscraper));
-        city.addLandMark(new LandMark("testMark3", location, AttractionType.Skyscraper));
-        city.addLandMark(new LandMark("testMark4", location, AttractionType.Skyscraper));
-        city.addLandMark(new LandMark("testMark5", location, AttractionType.Skyscraper));
-
-        user.addRecommendation(city);
-        user.addRecommendation(new City("test2", new Location("fake"),R.drawable.empire_state_building));
-        user.addRecommendation(new City("test3", new Location("fake"),R.drawable.empire_state_building));
-        user.addRecommendation(new City("test4", new Location("fake"),R.drawable.empire_state_building));
-        user.addRecommendation(new City("test5", new Location("fake"),R.drawable.empire_state_building));
 
         //todo: calculate recommended cities based on user. make interface for a Recommender class.
     }

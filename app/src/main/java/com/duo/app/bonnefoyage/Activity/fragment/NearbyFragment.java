@@ -1,6 +1,5 @@
 package com.duo.app.bonnefoyage.Activity.fragment;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,9 +9,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -29,15 +26,15 @@ import android.widget.Toast;
 
 import com.duo.app.bonnefoyage.Activity.data.IBonneRepo;
 import com.duo.app.bonnefoyage.Activity.data.TestDataBase;
-import com.duo.app.bonnefoyage.Manifest;
 import com.duo.app.bonnefoyage.R;
 import com.duo.app.bonnefoyage.View.adapter.CityCardAdapter;
 import com.duo.app.bonnefoyage.View.adapter.LandMarkAdapter;
 import com.duo.app.bonnefoyage.domein.City;
 import com.duo.app.bonnefoyage.domein.User;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.io.IOException;
-import java.security.Permissions;
 
 /**
  * This is the fragment for the tabViewActivity, it will show a list of nearby LandMarks
@@ -49,10 +46,6 @@ public class NearbyFragment extends Fragment {
 
     private User user;
     private RecyclerView recyclerView;
-    private CardView cardView;
-
-    private City currentCity;
-    private CityCardAdapter.CityViewHolder cityViewHolder;
 
     private LocationManager locationManager;
     private Geocoder geo;
@@ -76,15 +69,6 @@ public class NearbyFragment extends Fragment {
         //currentCity = getCity(user.getLocation());
         geo = new Geocoder(context);
 
-        if(ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED){
-            ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, getTargetRequestCode() );
-        }
-        listenForLocationUpdates();
-
-        Location tempLocation =locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        handleLocation(tempLocation);
-        currentCity = user.getRecommendations().get(0);
-        //currentCity = user.getCurrentCity;
     }
 
     private void listenForLocationUpdates() {
@@ -99,25 +83,24 @@ public class NearbyFragment extends Fragment {
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {
-                Toast.makeText(context, provider+" changed", Toast.LENGTH_SHORT).show();
-                buildAlertMessageNoGps();
+                Toast.makeText(context, provider + " changed", Toast.LENGTH_SHORT).show();
             }
 
             public void onProviderEnabled(String provider) {
-                Toast.makeText(context, provider+" enabled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, provider + " enabled", Toast.LENGTH_SHORT).show();
             }
 
             public void onProviderDisabled(String provider) {
-                Toast.makeText(context, provider+" is disabled", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(context, provider + " is disabled", Toast.LENGTH_SHORT).show();
+                buildAlertMessageNoGps();
             }
         };
 
 // Register the listener with the Location Manager to receive location updates
-        if(ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED){
-            ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, getTargetRequestCode() );
+        if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, getTargetRequestCode());
         }
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1, 1, locationListener);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1, 1, locationListener);
     }
 
     private void buildAlertMessageNoGps() {
@@ -133,15 +116,18 @@ public class NearbyFragment extends Fragment {
         alert.show();
     }
 
-    private void handleLocation(Location location){
-        if(location != null){
+    private void handleLocation(Location location) {
+        if (location != null) {
             user.setLocation(location);
             user.setCurrentCity(getCityFromLocation(location));
-            recyclerView.swapAdapter(new LandMarkAdapter(currentCity.getLandMarks(), user), false);
+            recyclerView.swapAdapter(new LandMarkAdapter(user), false);
+        }else {
+            user.setLocation(new Location("error"));
+            recyclerView.swapAdapter(new LandMarkAdapter(user), false);
         }
     }
 
-    private City getCityFromLocation(Location location){
+    private City getCityFromLocation(Location location) {
         String reportedCity = "";
         try {
             Address address = geo.getFromLocation(location.getLatitude(), location.getLongitude(), 1).get(0);
@@ -149,10 +135,10 @@ public class NearbyFragment extends Fragment {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if(!reportedCity.isEmpty()){
+        if (!reportedCity.isEmpty()) {
             City returnCity = dataRepo.getCity(reportedCity);
             return returnCity;
-        }else {
+        } else {
             return null;
         }
     }
@@ -162,12 +148,6 @@ public class NearbyFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_city_view, container, false);
 
         textView = (TextView) rootView.findViewById(R.id.textView_currentLocation);
-        City city = user.getCurrentCity();
-        if(city !=null){
-            textView.setText(user.getCurrentCity().getName());
-        }else {
-            textView.setText("unknown");
-        }
 
         //populate imageButton
         ImageButton cityButton = (ImageButton) rootView.findViewById(R.id.imageButton_city);
@@ -176,8 +156,22 @@ public class NearbyFragment extends Fragment {
         //create recyclerview
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView_LandMarks);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        recyclerView.setAdapter(new LandMarkAdapter(currentCity.getLandMarks(), user));
+        recyclerView.setAdapter(new LandMarkAdapter(user));
 
+        if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, getTargetRequestCode());
+        }
+        listenForLocationUpdates();
+
+        Location tempLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        handleLocation(tempLocation);
+
+        City city = user.getCurrentCity();
+        if (city != null) {
+            textView.setText(user.getCurrentCity().getName());
+        } else {
+            textView.setText("unknown");
+        }
         return rootView;
     }
 }
