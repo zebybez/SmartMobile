@@ -1,5 +1,6 @@
 package com.duo.app.bonnefoyage.domein;
 
+import android.location.Geocoder;
 import android.location.Location;
 
 import com.duo.app.bonnefoyage.Enum.AttractionType;
@@ -47,6 +48,11 @@ public class LandMark {
 
     public void removeSubAttraction(AttractionType attraction){
         allSubAttractions.remove(attraction);
+    }
+
+    public String getAddress(){
+        return "temporary test address";
+        //TODO change location to an address.
     }
 
 }

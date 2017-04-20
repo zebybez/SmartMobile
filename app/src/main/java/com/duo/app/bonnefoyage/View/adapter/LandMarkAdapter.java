@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.duo.app.bonnefoyage.R;
 import com.duo.app.bonnefoyage.domein.LandMark;
+import com.duo.app.bonnefoyage.domein.User;
 
 import java.util.List;
 
@@ -18,9 +19,11 @@ import java.util.List;
 public class LandMarkAdapter extends RecyclerView.Adapter<LandMarkAdapter.LandMarkViewHolder> {
 
     private List<LandMark> landMarks;
+    private User user;
 
-    public LandMarkAdapter(List<LandMark> landMarks){
+    public LandMarkAdapter(List<LandMark> landMarks, User user){
         this.landMarks = landMarks;
+        this.user = user;
     }
 
     @Override
@@ -36,8 +39,23 @@ public class LandMarkAdapter extends RecyclerView.Adapter<LandMarkAdapter.LandMa
 
     @Override
     public void onBindViewHolder(LandMarkViewHolder holder, int position) {
-        holder.textViewAddresAndDistance.setText(landMarks.get(position).getLocation().toString());//TODO change location to an address with distance from user, update list on activity load.
+        LandMark landMark = landMarks.get(position);
+        holder.textViewAddresAndDistance.setText(landMark.getAddress() /*+" "+ calcDistance(landMark)*/);
         holder.textViewName.setText(landMarks.get(position).getName());
+    }
+
+    /**
+     * returns the distance between the user and the landmark, in KM.
+     * @param landMark the landmark to calculate distance to.
+     * @return a string representing the distance
+     */
+    private String calcDistance(LandMark landMark) {
+        if(user.getLocation() != null){
+            return String.valueOf(landMark.getLocation().distanceTo(user.getLocation()) / 1000) + "KM";
+        }else{
+            return "unknown";
+        }
+
     }
 
 

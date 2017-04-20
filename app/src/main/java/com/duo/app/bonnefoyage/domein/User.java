@@ -21,10 +21,12 @@ public class User implements Serializable{
     private Location location;
     private List<LandMark> likedLocations;
     private List<City> recommendations;
+    private City currentCity;
 
     public User(String email, String name) {
         this.email = email;
         this.name = name;
+        currentCity = null;
 
         interests = new ArrayList<>();
         likedLocations = new ArrayList<>();
@@ -73,5 +75,13 @@ public class User implements Serializable{
 
     public void removeRecommendation(City toRemove){
         recommendations.remove(toRemove);
+    }
+
+    public void setCurrentCity(City currentCity) {
+        this.currentCity = currentCity;
+    }
+
+    public City getCurrentCity(){
+        return currentCity;
     }
 }

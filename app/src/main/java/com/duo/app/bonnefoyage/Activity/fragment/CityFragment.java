@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.duo.app.bonnefoyage.Enum.AttractionType;
 import com.duo.app.bonnefoyage.R;
 import com.duo.app.bonnefoyage.View.adapter.CityCardAdapter;
 import com.duo.app.bonnefoyage.domein.User;

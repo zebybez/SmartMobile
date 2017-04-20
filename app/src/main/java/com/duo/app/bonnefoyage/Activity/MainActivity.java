@@ -1,5 +1,6 @@
 package com.duo.app.bonnefoyage.Activity;
 
+import android.content.Context;
 import android.location.Location;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private User user;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,12 +80,17 @@ public class MainActivity extends AppCompatActivity {
 
         //testing here
         user = new User("test@test.test", "testUser");
+
         Location location = new Location("test");
-        location.setLatitude(40.7);
-        location.setLongitude(-73.9);
+        location.setLatitude(54.7);
+        location.setLongitude(3.9);
 
         City city = new City("New York", location, R.drawable.empire_state_building);
-        city.addLandMark(new LandMark("testMark", location, AttractionType.Skyscraper));
+        city.addLandMark(new LandMark("testMark1", location, AttractionType.Skyscraper));
+        city.addLandMark(new LandMark("testMark2", location, AttractionType.Skyscraper));
+        city.addLandMark(new LandMark("testMark3", location, AttractionType.Skyscraper));
+        city.addLandMark(new LandMark("testMark4", location, AttractionType.Skyscraper));
+        city.addLandMark(new LandMark("testMark5", location, AttractionType.Skyscraper));
 
         user.addRecommendation(city);
         user.addRecommendation(new City("test2", new Location("fake"),R.drawable.empire_state_building));
@@ -176,5 +183,6 @@ public class MainActivity extends AppCompatActivity {
             }
             return null;
         }
+
     }
 }
