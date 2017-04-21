@@ -2,6 +2,7 @@ package com.duo.app.bonnefoyage;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -11,6 +12,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.duo.app.bonnefoyage.Activity.MainActivity;
 
 public class keuzeLijst extends AppCompatActivity implements View.OnClickListener {
     private CheckBox cbMuseum, cbChurch, cbStadium, cbLibrary, cbSkyscraper, cbCinema, cbStation, cbShopping, cbNature, cbPool, cbGamling, cbZoo, cbHospital;
@@ -51,11 +54,16 @@ public class keuzeLijst extends AppCompatActivity implements View.OnClickListene
             Toast.makeText(this, "Vul een naam in", Toast.LENGTH_LONG).show();
             return;
         }
-
-
+        else{
+            startMainActivity();
+        }
 
     }
 
+    public void startMainActivity(){
+        Intent i = new Intent(keuzeLijst.this, MainActivity.class);
+        startActivity(i);
+    }
     @Override
     public void onClick(View view) {
         if(view  == btnSubmit){
