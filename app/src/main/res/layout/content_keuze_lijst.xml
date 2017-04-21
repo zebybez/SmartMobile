@@ -9,38 +9,156 @@
     tools:showIn="@layout/activity_keuze_lijst">
 
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="-276dp"
-        tools:layout_editor_absoluteY="-138dp">
-
+    <RelativeLayout
+        android:layout_width="585dp"
+        android:layout_height="810dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="-34dp">
 
         <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Selecteer je interesses hieronder:"
-            android:textSize="40sp"
-            tools:layout_editor_absoluteX="5dp"
-            tools:layout_editor_absoluteY="0dp" />
-
-        <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/textView3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView2"
+            android:layout_marginTop="40dp"
+            android:text="Naam:"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/txtNaam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Vul hier je naam in"
+            android:layout_below="@+id/textView3"
+            android:layout_alignParentStart="true" />
+
+        <CheckBox
+            android:id="@+id/cbMuseum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView2"
+            android:layout_marginTop="132dp"
+            android:text="Museum"
+            android:onClick="onCheckboxClicked"
+            />
+
+        <CheckBox
+            android:id="@+id/cbChurch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/cbMuseum"
+            android:text="Church"
+            android:onClick="onCheckboxClicked"/>
+
+        <CheckBox
+            android:id="@+id/cbStadium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/cbChurch"
+            android:text="Stadium"
+            android:onClick="onCheckboxClicked"/>
+
+        <CheckBox
+            android:id="@+id/cbLibrary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/cbStadium"
+            android:text="Library"
+            android:onClick="onCheckboxClicked"/>
+
+        <CheckBox
+            android:id="@+id/cbSkyscraper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/cbLibrary"
+            android:text="Skyscraper"
+            android:onClick="onCheckboxClicked"/>
+
+        <CheckBox
+            android:id="@+id/cbCinema"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/cbSkyscraper"
+            android:text="Cinema"
+            android:onClick="onCheckboxClicked"/>
+
+        <CheckBox
+            android:id="@+id/cbStation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/cbCinema"
+            android:text="Station"
+            android:onClick="onCheckboxClicked"/>
+
+        <CheckBox
+            android:id="@+id/cbShopping"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/cbStation"
+            android:text="Shopping"
+            android:onClick="onCheckboxClicked"/>
+
+        <CheckBox
+            android:id="@+id/cbNature"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/cbShopping"
+            android:text="Nature"
+            android:onClick="onCheckboxClicked"/>
+
+        <CheckBox
+            android:id="@+id/cbPool"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/cbNature"
+            android:text="Pool"
+            android:onClick="onCheckboxClicked"/>
+
+        <CheckBox
+            android:id="@+id/cbGambling"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/cbPool"
+            android:text="Gambling"
+            android:onClick="onCheckboxClicked"/>
+
+        <CheckBox
+            android:id="@+id/cbZoo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/cbGambling"
+            android:text="Zoo"
+            android:onClick="onCheckboxClicked"/>
+
+        <CheckBox
+            android:id="@+id/cbHospital"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/cbZoo"
+            android:text="Hospital"
+            android:onClick="onCheckboxClicked"/>
 
         <Button
             android:id="@+id/btnSubmit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Submit"
-            tools:layout_editor_absoluteX="26dp"
-            tools:layout_editor_absoluteY="740dp" />
+            android:layout_below="@+id/cbHospital"
+            android:layout_centerHorizontal="true" />
 
-
-    </LinearLayout>
-
-
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

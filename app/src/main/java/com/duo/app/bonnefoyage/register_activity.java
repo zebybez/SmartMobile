@@ -25,6 +25,7 @@ public class register_activity extends AppCompatActivity implements View.OnClick
 
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +80,8 @@ public class register_activity extends AppCompatActivity implements View.OnClick
                             Toast.makeText(register_activity.this,"Successfully registered",Toast.LENGTH_LONG).show();
                         }else{
                             //display some message here
-                            Toast.makeText(register_activity.this,"Registration Error",Toast.LENGTH_LONG).show();
+                            startInteresseActivity();
+                            Toast.makeText(register_activity.this,"Successfully registered",Toast.LENGTH_LONG).show();
                         }
                         progressDialog.dismiss();
                     }
@@ -105,4 +107,5 @@ public class register_activity extends AppCompatActivity implements View.OnClick
             startLoginActivity();
         }
     }
+
 }

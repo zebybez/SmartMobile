@@ -1,62 +1,66 @@
 package com.duo.app.bonnefoyage;
 
-import java.util.ArrayList;
-import java.util.List;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemSelectedListener;
 
-class keuzeLijst extends Activity implements OnItemSelectedListener{
+public class keuzeLijst extends AppCompatActivity implements View.OnClickListener {
+    private CheckBox cbMuseum, cbChurch, cbStadium, cbLibrary, cbSkyscraper, cbCinema, cbStation, cbShopping, cbNature, cbPool, cbGamling, cbZoo, cbHospital;
+    private EditText txtNaam;
+    private Button btnSubmit;
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_keuze_lijst);
+        setContentView(R.layout.content_keuze_lijst);
 
-        // Spinner element
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
 
-        // Spinner click listener
-        spinner.setOnItemSelectedListener(this);
+        cbMuseum = (CheckBox) findViewById(R.id.cbMuseum);
+        cbChurch = (CheckBox) findViewById(R.id.cbChurch);
+        cbStadium = (CheckBox) findViewById(R.id.cbStadium);
+        cbLibrary = (CheckBox) findViewById(R.id.cbLibrary);
+        cbSkyscraper = (CheckBox) findViewById(R.id.cbSkyscraper);
+        cbCinema = (CheckBox) findViewById(R.id.cbCinema);
+        cbStation = (CheckBox) findViewById(R.id.cbStation);
+        cbShopping = (CheckBox) findViewById(R.id.cbShopping);
+        cbNature = (CheckBox) findViewById(R.id.cbNature);
+        cbPool = (CheckBox) findViewById(R.id.cbPool);
+        cbGamling = (CheckBox) findViewById(R.id.cbGambling);
+        cbZoo = (CheckBox) findViewById(R.id.cbZoo);
+        cbHospital = (CheckBox) findViewById(R.id.cbHospital);
+        txtNaam = (EditText) findViewById(R.id.txtNaam);
+        btnSubmit = (Button) findViewById(R.id.btnSubmit);
 
-        // Spinner Drop down elements
-        List<String> categories = new ArrayList<String>();
-        categories.add("Musea");
-        categories.add("Kerken");
-        categories.add("Voetbalstadions");
-        categories.add("Winkelsstraat");
-        categories.add("Moskeeën");
-        categories.add("Bibliotheken");
-        categories.add("Centraal station");
-        categories.add("Parken");
-        categories.add("Casino");
-        categories.add("Ecaperoom");
-        categories.add("Dierentuin");
-        categories.add("Ziekenhuis");
+        btnSubmit.setOnClickListener(this);
+    }
 
-        // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
 
-        // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        // attaching data adapter to spinner
-        spinner.setAdapter(dataAdapter);
+    private void startCheckboxActivity() {
+
+        String naam = txtNaam.getText().toString().trim();
+        if (TextUtils.isEmpty(naam)) {
+            Toast.makeText(this, "Vul een naam in", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+
+
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // On selecting a spinner item
-        String item = parent.getItemAtPosition(position).toString();
+    public void onClick(View view) {
+        if(view  == btnSubmit){
+            startCheckboxActivity();
+        }
+    }
 
-        // Showing selected spinner item
-        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
-    }
-    public void onNothingSelected(AdapterView<?> arg0) {
-        // TODO Auto-generated method stub
-    }
 }
