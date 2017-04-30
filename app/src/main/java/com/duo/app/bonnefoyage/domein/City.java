@@ -22,6 +22,18 @@ public class City {
     private Location centreLocation;
 
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public City(){
+        this.imageID = R.drawable.lost_pigeons;
+        name = "Wilderness";
+        landMarks = new ArrayList<>();
+
+        centreLocation = new Location("fake");
+    }
+
     public City(String name, Location centreLocation, int imageID) {
         this.imageID = imageID;
         this.name = name;

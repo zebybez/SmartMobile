@@ -24,6 +24,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.duo.app.bonnefoyage.Activity.data.Database;
 import com.duo.app.bonnefoyage.Activity.data.IBonneRepo;
 import com.duo.app.bonnefoyage.Activity.data.TestDataBase;
 import com.duo.app.bonnefoyage.R;
@@ -45,7 +46,7 @@ import java.io.IOException;
 public class NearbyFragment extends Fragment {
 
     private User user;
-    private RecyclerView recyclerView;
+
 
     private LocationManager locationManager;
     private Geocoder geo;
@@ -54,15 +55,17 @@ public class NearbyFragment extends Fragment {
     private IBonneRepo dataRepo;
 
     private TextView textView;
-
+    private RecyclerView recyclerView;
+    private ImageButton imageButton;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
-        user = (User) args.getSerializable("user");
+
         context = getActivity();
-        dataRepo = new TestDataBase();
+        dataRepo = Database.getDataInstance();
         geo = new Geocoder(context);
+        user = dataRepo.getUser(args.getString("email"));
     }
 
     private void listenForLocationUpdates() {
@@ -112,9 +115,11 @@ public class NearbyFragment extends Fragment {
 
     private void handleLocation(Location location) {
         if (location != null) {
+            City temp = getCityFromLocation(location);
             user.setLocation(location);
-            user.setCurrentCity(getCityFromLocation(location));
+            user.setCurrentCity(temp);
             recyclerView.swapAdapter(new LandMarkAdapter(user), false);
+            textView.setText(temp.getName());
         }else {
             user.setLocation(new Location("error"));
             recyclerView.swapAdapter(new LandMarkAdapter(user), false);
@@ -131,6 +136,10 @@ public class NearbyFragment extends Fragment {
         }
         if (!reportedCity.isEmpty()) {
             City returnCity = dataRepo.getCity(reportedCity);
+            if(returnCity == null){
+                returnCity = new City();
+                returnCity.setName(reportedCity);
+            }
             return returnCity;
         } else {
             return null;
@@ -143,9 +152,9 @@ public class NearbyFragment extends Fragment {
 
         textView = (TextView) rootView.findViewById(R.id.textView_currentLocation);
 
+        imageButton = (ImageButton) rootView.findViewById(R.id.imageButton_city);
         //populate imageButton
-        ImageButton cityButton = (ImageButton) rootView.findViewById(R.id.imageButton_city);
-        cityButton.setImageResource(R.drawable.empire_state_building);
+        imageButton.setImageResource(R.drawable.empire_state_building);
 
         //create recyclerview
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView_LandMarks);

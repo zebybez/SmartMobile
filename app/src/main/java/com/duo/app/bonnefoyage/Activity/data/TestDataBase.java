@@ -55,4 +55,14 @@ public class TestDataBase implements IBonneRepo{
     public City getCity(String cityName){
         return cityMap.get(cityName);
     }
+
+    @Override
+    public void putUser(User user) {
+        userMap.put(user.getEmail(), user);
+    }
+
+    @Override
+    public void putCity(City city) {
+        cityMap.put(city.getName(), city);
+    }
 }

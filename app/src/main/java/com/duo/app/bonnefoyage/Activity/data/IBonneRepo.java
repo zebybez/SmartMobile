@@ -19,5 +19,8 @@ public interface IBonneRepo {
 
     City getCity(String cityName);
 
+    void putUser(User user);
+
+    void putCity(City city);
 
 }

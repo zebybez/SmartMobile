@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.duo.app.bonnefoyage.Activity.data.Database;
+import com.duo.app.bonnefoyage.Activity.data.IBonneRepo;
 import com.duo.app.bonnefoyage.Enum.AttractionType;
 import com.duo.app.bonnefoyage.R;
 import com.duo.app.bonnefoyage.View.adapter.CityCardAdapter;
@@ -22,6 +24,8 @@ import com.duo.app.bonnefoyage.domein.User;
 
 public class CityFragment extends Fragment {
 
+    private IBonneRepo dataRepo;
+
     private User user;
     private RecyclerView recycleViewCities;
 
@@ -31,7 +35,8 @@ public class CityFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
-        user = (User) args.getSerializable("user");
+        dataRepo = Database.getDataInstance();
+        user = dataRepo.getUser(args.getString("email"));
         //todo: get recommended cities for user, and show in list (RecyclerView), FUNCTIONALITEIT
     }
 

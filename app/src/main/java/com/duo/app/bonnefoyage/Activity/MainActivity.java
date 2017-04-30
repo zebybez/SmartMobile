@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.duo.app.bonnefoyage.Activity.data.Database;
 import com.duo.app.bonnefoyage.Activity.data.IBonneRepo;
 import com.duo.app.bonnefoyage.Activity.data.TestDataBase;
 import com.duo.app.bonnefoyage.Enum.AttractionType;
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        dataRepo = new TestDataBase();
+        dataRepo = Database.getDataInstance();
         //testing here
         user = new User("test@test.test", "testUser");
 
@@ -150,6 +151,9 @@ public class MainActivity extends AppCompatActivity {
 
             Bundle fragmentBundle = new Bundle();
             fragmentBundle.putSerializable("user", user);
+
+            dataRepo.putUser(user);
+            fragmentBundle.putString("email", user.getEmail());
             //todo put firebase database item, to get data from? ipv user, or to put data into database.
             Fragment fragment;
             switch (position){
