@@ -32,11 +32,18 @@ public class TestDataBase implements IBonneRepo{
         testLocation.setLatitude(51.4);
         testLocation.setLongitude(5.5);
         //city
-        City city = new City("Eindhoven", testLocation, R.drawable.empire_state_building);
+        City city = new City("Eindhoven", testLocation, R.drawable.eindhoven_stad1);
         city.addLandMark(new LandMark("Vue bioscoop", testLocation, AttractionType.Cinema));
+
+        City newYork = new City("NewYork", testLocation, R.drawable.empire_state_building);
+        newYork.addLandMark(new LandMark("Empire statebuilding", testLocation, AttractionType.Skyscraper));
 
         //put cities
         cityMap.put(city.getName(), city);
+        cityMap.put(newYork.getName(), newYork);
+
+        //put user
+        userMap.put("test@test.com", new User("test@test.com", "test"));
 
     }
 

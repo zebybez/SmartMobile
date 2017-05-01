@@ -59,27 +59,16 @@ public class MainActivity extends AppCompatActivity {
 
         dataRepo = Database.getDataInstance();
         //testing here
-        user = new User("test@test.test", "testUser");
+        user = dataRepo.getUser("test@test.com");
 
         Location location = new Location("test");
         location.setLatitude(54.7);
         location.setLongitude(3.9);
 
-        City city = new City("New York", location, R.drawable.empire_state_building);
-        City city2 = new City("Eindhoven", location, R.drawable.empire_state_building);
-        city.addLandMark(new LandMark("testMark1", location, AttractionType.Skyscraper));
-        city.addLandMark(new LandMark("testMark2", location, AttractionType.Skyscraper));
-        city.addLandMark(new LandMark("testMark3", location, AttractionType.Skyscraper));
-        city.addLandMark(new LandMark("testMark4", location, AttractionType.Skyscraper));
-        city.addLandMark(new LandMark("testMark5", location, AttractionType.Skyscraper));
-
+        City city = dataRepo.getCity("NewYork");
+        City city2 = dataRepo.getCity("Eindhoven");
         user.addRecommendation(city);
         user.addRecommendation(city2);
-        user.addRecommendation(new City("test2", new Location("fake"),R.drawable.empire_state_building));
-        user.addRecommendation(new City("test3", new Location("fake"),R.drawable.empire_state_building));
-        user.addRecommendation(new City("test4", new Location("fake"),R.drawable.empire_state_building));
-        user.addRecommendation(new City("test5", new Location("fake"),R.drawable.empire_state_building));
-
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -96,14 +85,14 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(mViewPager);
 
         //
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
 
         //user = dataRepo.getUser("test@test.test");
         //todo: get user from intent. for now use test user.

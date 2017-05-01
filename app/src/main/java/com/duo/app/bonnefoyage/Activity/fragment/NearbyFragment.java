@@ -93,7 +93,7 @@ public class NearbyFragment extends Fragment {
             }
         };
 
-// Register the listener with the Location Manager to receive location updates
+        // Register the listener with the Location Manager to receive location updates
         if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, getTargetRequestCode());
         }
@@ -120,9 +120,13 @@ public class NearbyFragment extends Fragment {
             user.setCurrentCity(temp);
             recyclerView.swapAdapter(new LandMarkAdapter(user), false);
             textView.setText(temp.getName());
+            imageButton.setImageResource(temp.getImageID());
+
+            //todo update bannerImage
         }else {
             user.setLocation(new Location("error"));
             recyclerView.swapAdapter(new LandMarkAdapter(user), false);
+            imageButton.setImageResource(R.drawable.lost_pigeons);
         }
     }
 
@@ -154,7 +158,7 @@ public class NearbyFragment extends Fragment {
 
         imageButton = (ImageButton) rootView.findViewById(R.id.imageButton_city);
         //populate imageButton
-        imageButton.setImageResource(R.drawable.empire_state_building);
+        imageButton.setImageResource(user.getCurrentCity().getImageID());
 
         //create recyclerview
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView_LandMarks);

@@ -46,9 +46,9 @@ public class LandMarkAdapter extends RecyclerView.Adapter<LandMarkAdapter.LandMa
      */
     @Override
     public int getItemViewType(int position) {
-//        if(landMarks.size() == 0){
-//            return R.layout.list_item_no_landmarks;
-//        }
+        if(landMarks.size() == 0){
+            return R.layout.list_item_no_landmarks;
+        }
         if(position == landMarks.size()){
             return R.layout.list_item_add_button;
         }else {
@@ -62,8 +62,8 @@ public class LandMarkAdapter extends RecyclerView.Adapter<LandMarkAdapter.LandMa
 
         if(viewType == R.layout.list_item_landmark){
             v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_landmark, parent, false);
-//        }else if(viewType == R.layout.list_item_no_landmarks){
-//            v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_no_landmarks, parent, false);
+        }else if(viewType == R.layout.list_item_no_landmarks){
+            v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_no_landmarks, parent, false);
         }else {
             v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_add_button, parent, false);
         }
@@ -79,7 +79,7 @@ public class LandMarkAdapter extends RecyclerView.Adapter<LandMarkAdapter.LandMa
             holder.buttonAddNew.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(holder.itemView.getContext(), "clicked", Toast.LENGTH_LONG).show();
+                    Toast.makeText(holder.itemView.getContext(), "clicked", Toast.LENGTH_SHORT).show();
                     //todo make this button go to another activity. //lastButtonOnClick
                 }
             });
@@ -91,7 +91,7 @@ public class LandMarkAdapter extends RecyclerView.Adapter<LandMarkAdapter.LandMa
     }
 
     private void lastButtonOnClick(){
-        //Toast.makeText(this.getContext, "clicked", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this.getContext, "clicked", Toast.LENGTH_SHORT).show();
     }
 
     private String getAddressFromLocation(Location location) {
@@ -115,6 +115,9 @@ public class LandMarkAdapter extends RecyclerView.Adapter<LandMarkAdapter.LandMa
 
     @Override
     public int getItemCount() {
+        if(landMarks.size() == 0){
+            return 2;
+        }
         return landMarks.size()+1;
     }
 
