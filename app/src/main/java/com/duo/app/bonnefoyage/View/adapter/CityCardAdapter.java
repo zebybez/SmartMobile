@@ -1,6 +1,7 @@
 package com.duo.app.bonnefoyage.View.adapter;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.duo.app.bonnefoyage.Activity.CityViewActivity;
 import com.duo.app.bonnefoyage.R;
 import com.duo.app.bonnefoyage.domein.City;
 
@@ -22,7 +24,7 @@ import java.util.List;
 
 public class CityCardAdapter extends RecyclerView.Adapter<CityCardAdapter.CityViewHolder> {
 
-    private List<City> cities;
+    private static List<City> cities;
 
     public CityCardAdapter(List<City> cities) {
         this.cities = cities;
@@ -67,8 +69,10 @@ public class CityCardAdapter extends RecyclerView.Adapter<CityCardAdapter.CityVi
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent();
-
+            Intent intent = new Intent(v.getContext(), CityViewActivity.class);
+            Bundle cityBundle = new Bundle();
+            cityBundle.putSerializable("city", cities.get(getAdapterPosition()));
+            intent.putExtras(cityBundle);
             v.getContext().startActivity(intent);
         }
     }

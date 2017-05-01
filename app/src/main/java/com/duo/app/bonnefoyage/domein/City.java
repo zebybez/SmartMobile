@@ -6,6 +6,7 @@ import android.media.Image;
 import com.duo.app.bonnefoyage.Enum.AttractionType;
 import com.duo.app.bonnefoyage.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,17 +15,13 @@ import java.util.List;
  * Created by yannic on 13/04/2017.
  */
 
-public class City {
+public class City implements Serializable {
     private int imageID;
     private String name;
     private Image bannerImage;
     private List<LandMark> landMarks;
     private Location centreLocation;
 
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public City(){
         this.imageID = R.drawable.lost_pigeons;
@@ -44,6 +41,10 @@ public class City {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Image getBannerImage() {

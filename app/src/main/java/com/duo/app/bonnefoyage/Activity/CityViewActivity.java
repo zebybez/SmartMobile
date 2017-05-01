@@ -1,4 +1,4 @@
-package com.duo.app.bonnefoyage.Activity.fragment;
+package com.duo.app.bonnefoyage.Activity;
 
 import android.app.Activity;
 import android.os.Bundle;
