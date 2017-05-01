@@ -46,9 +46,9 @@ public class LandMarkAdapter extends RecyclerView.Adapter<LandMarkAdapter.LandMa
      */
     @Override
     public int getItemViewType(int position) {
-        if(landMarks.size() == 0){
-            return R.layout.list_item_no_landmarks;
-        }
+//        if(landMarks.size() == 0){
+//            return R.layout.list_item_no_landmarks;
+//        }
         if(position == landMarks.size()){
             return R.layout.list_item_add_button;
         }else {
@@ -62,8 +62,8 @@ public class LandMarkAdapter extends RecyclerView.Adapter<LandMarkAdapter.LandMa
 
         if(viewType == R.layout.list_item_landmark){
             v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_landmark, parent, false);
-        }else if(viewType == R.layout.list_item_no_landmarks){
-            v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_no_landmarks, parent, false);
+//        }else if(viewType == R.layout.list_item_no_landmarks){
+//            v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_no_landmarks, parent, false);
         }else {
             v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_add_button, parent, false);
         }
@@ -80,7 +80,7 @@ public class LandMarkAdapter extends RecyclerView.Adapter<LandMarkAdapter.LandMa
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(holder.itemView.getContext(), "clicked", Toast.LENGTH_LONG).show();
-                    //todo make this button go to another activity.
+                    //todo make this button go to another activity. //lastButtonOnClick
                 }
             });
         } else {
@@ -115,7 +115,7 @@ public class LandMarkAdapter extends RecyclerView.Adapter<LandMarkAdapter.LandMa
 
     @Override
     public int getItemCount() {
-        return landMarks.size();
+        return landMarks.size()+1;
     }
 
     //INNER ClASS
