@@ -14,7 +14,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -26,9 +25,7 @@ import android.widget.Toast;
 
 import com.duo.app.bonnefoyage.Activity.data.Database;
 import com.duo.app.bonnefoyage.Activity.data.IBonneRepo;
-import com.duo.app.bonnefoyage.Activity.data.TestDataBase;
 import com.duo.app.bonnefoyage.R;
-import com.duo.app.bonnefoyage.View.adapter.CityCardAdapter;
 import com.duo.app.bonnefoyage.View.adapter.LandMarkAdapter;
 import com.duo.app.bonnefoyage.domein.City;
 import com.duo.app.bonnefoyage.domein.User;
@@ -121,8 +118,6 @@ public class NearbyFragment extends Fragment {
             recyclerView.swapAdapter(new LandMarkAdapter(user), false);
             textView.setText(temp.getName());
             imageButton.setImageResource(temp.getImageID());
-
-            //todo update bannerImage
         }else {
             user.setLocation(new Location("error"));
             recyclerView.swapAdapter(new LandMarkAdapter(user), false);
@@ -146,6 +141,7 @@ public class NearbyFragment extends Fragment {
             }
             return returnCity;
         } else {
+            //todo throw exeption
             return null;
         }
     }

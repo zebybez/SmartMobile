@@ -1,33 +1,24 @@
 package com.duo.app.bonnefoyage.Activity;
 
-import android.content.Context;
-import android.location.Location;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.duo.app.bonnefoyage.Activity.data.Database;
 import com.duo.app.bonnefoyage.Activity.data.IBonneRepo;
-import com.duo.app.bonnefoyage.Activity.data.TestDataBase;
-import com.duo.app.bonnefoyage.Enum.AttractionType;
-import com.duo.app.bonnefoyage.R;
-import com.duo.app.bonnefoyage.domein.City;
-import com.duo.app.bonnefoyage.domein.LandMark;
-import com.duo.app.bonnefoyage.domein.User;
 import com.duo.app.bonnefoyage.Activity.fragment.CityFragment;
 import com.duo.app.bonnefoyage.Activity.fragment.NearbyFragment;
 import com.duo.app.bonnefoyage.Activity.fragment.VisitedLocationsFragment;
+import com.duo.app.bonnefoyage.R;
+import com.duo.app.bonnefoyage.domein.City;
+import com.duo.app.bonnefoyage.domein.User;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -61,10 +52,6 @@ public class MainActivity extends AppCompatActivity {
         //testing here
         user = dataRepo.getUser("test@test.com");
 
-        Location location = new Location("test");
-        location.setLatitude(54.7);
-        location.setLongitude(3.9);
-
         City city = dataRepo.getCity("NewYork");
         City city2 = dataRepo.getCity("Eindhoven");
         user.addRecommendation(city);
@@ -84,20 +71,7 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        //
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
-        //user = dataRepo.getUser("test@test.test");
-        //todo: get user from intent. for now use test user.
-
-
+        //todo: get user email from intent, get actual user from database. For now use test user.
 
         //todo: calculate recommended cities based on user. make interface for a Recommender class.
     }
@@ -143,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
 
             dataRepo.putUser(user);
             fragmentBundle.putString("email", user.getEmail());
-            //todo put firebase database item, to get data from? ipv user, or to put data into database.
             Fragment fragment;
             switch (position){
                 case 0:

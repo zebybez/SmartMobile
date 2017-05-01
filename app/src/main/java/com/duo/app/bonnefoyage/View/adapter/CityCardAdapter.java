@@ -1,5 +1,6 @@
 package com.duo.app.bonnefoyage.View.adapter;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,18 +24,19 @@ public class CityCardAdapter extends RecyclerView.Adapter<CityCardAdapter.CityVi
 
     private List<City> cities;
 
-    @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
-    }
-
     public CityCardAdapter(List<City> cities) {
         this.cities = cities;
     }
 
     @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+    }
+
+    @Override
     public CityViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_city, parent, false);
+
         return new CityViewHolder(v);
     }
 
@@ -50,7 +52,7 @@ public class CityCardAdapter extends RecyclerView.Adapter<CityCardAdapter.CityVi
     }
 
     //INNER CLASS
-    public static class CityViewHolder extends RecyclerView.ViewHolder {
+    public static class CityViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView cityTextView;
         public ToggleButton toggleLike;
@@ -61,6 +63,13 @@ public class CityCardAdapter extends RecyclerView.Adapter<CityCardAdapter.CityVi
             cityTextView = (TextView) itemView.findViewById(R.id.textView_CityName);
             toggleLike = (ToggleButton) itemView.findViewById(R.id.toggleButton_LikeCity);
             imageButtonViewCity = (ImageButton) itemView.findViewById(R.id.imageButton_city);
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent();
+
+            v.getContext().startActivity(intent);
         }
     }
 }
